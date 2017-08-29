@@ -75,7 +75,7 @@ if(isset($_GET['id']))
             if(isset($_SESSION['user']))
             { ?>
 
-                <form method="post" id="answer" action="view/admin/answer.php">
+                <form method="post" action="view/admin/answer.php">
                     <div class="form-group">
                         <span class="glyphicon glyphicon-comment"></span> <label for="answer"><font size="4" color="#ff2b1a">Answer this question</font></label>
 
@@ -87,12 +87,11 @@ if(isset($_GET['id']))
                         <button type="submit" id="submit" class="form-control btn-danger" style="float: right;height: 35px;width: 150px;text-align: center">Post Your Answer</button>
                     </div>
 
-                    <input type="hidden" name="questionID" value="<?php echo $ask['id'];?>">
-                    <input type="hidden" name="userID" value="<?php echo $_SESSION['user']['id'];?>">
+                    <input type="hidden" name="questionID" id="questionID" value="<?php echo $ask['id'];?>">
+                    <input type="hidden" name="userID" id="userID" value="<?php echo $_SESSION['user']['id'];?>">
 
 
                 </form>
-                <div class="success"></div>
             <?php }?>
                 <hr>
 
@@ -184,56 +183,61 @@ if(isset($_GET['id']))
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
 
-	
 <script>
+/*
     $(document).ready(function(){
+        displayComment();
 
+        $("#submit").click(function(){
+            var answer = $("#answer").val();
+            var questionID = $("#questionID").val();
+            var userID = $("#userID").val();
+
+            $.ajax({
+                url : "view/admin/answer.php",
+                type : "POST",
+                async : false,
+                data : {
+                    "save" : 1,
+                    "answer" : answer,
+                    "questionID" : questionID,
+                    "userID" : userID
+                },
+
+                success:function(save)
+                {
+                    displayComment();
+                    $("#answer").val("");
+                }
+            });
+
+
+        });
     });
 
-    $('#submit').click(function(event){
-        event.preventDefault();
-        var reply = $('#answer').serializeArray();
-        $.post(
-            $('#answer').attr('action'),
-            reply,
-
-            function(data)
+    function displayComment()
+    {
+        $.ajax({
+            url: "question.php",
+            type: "POST",
+            async : false,
+            data:{
+                "show" :1
+            },
+            success:function(comment)
             {
-                $('.success').html(data);
-                $('.success').fadeOut(5000);
-                $('textarea').val("");
-
+                $("#user_reply").html(comment);
             }
+        });
+    }
 
-        );
-    });
 
 
+
+
+*/
 </script>
 
 

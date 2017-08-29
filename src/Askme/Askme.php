@@ -471,31 +471,36 @@ class Askme
 
     public function Answer($info='')
     {
-        $this->answer = htmlspecialchars(htmlentities(stripslashes(strip_tags($info['answer']))));
-        $questionID = (int)htmlspecialchars(htmlentities(stripslashes(strip_tags($info['questionID']))));
-        $userID = (int)htmlspecialchars(htmlspecialchars(stripslashes(strip_tags($info['userID']))));
 
-        $postAnswer = $this->dbconnect->prepare("INSERT INTO comments(question_id,user_id,answer) VALUES (:question_id,:user_id,:answer)");
-        $postAnswer->bindParam(':question_id',$questionID);
-        $postAnswer->bindParam(':user_id',$userID);
-        $postAnswer->bindParam(':answer',$this->answer);
+        if(isset($_POST['save']))
+        {
+            $answer = htmlspecialchars(htmlentities(stripslashes(strip_tags($info['answer']))));
+            $questionID = (int)htmlspecialchars(htmlentities(stripslashes(strip_tags($info['questionID']))));
+            $userID = (int)htmlspecialchars(htmlspecialchars(stripslashes(strip_tags($info['userID']))));
 
-        $postAnswer->execute();
+            $postAnswer = $this->dbconnect->prepare("INSERT INTO comments(question_id,user_id,answer) VALUES (:question_id,:user_id,:answer)");
+            $postAnswer->bindParam(':question_id',$questionID);
+            $postAnswer->bindParam(':user_id',$userID);
+            $postAnswer->bindParam(':answer',$answer);
 
-        echo "<font color='green' size='4'><strong>Thank you for your answer</strong></font>";
+            $postAnswer->execute();
+        }
+
+
+
 
     }
 
     public function getAnswer()
     {
 
-        $answer = $this->dbconnect->prepare("SELECT users.firstname,users.lastname,users.profile_pic,comments.user_id,comments.answer FROM users,`comments` WHERE question_id = ? AND comments.user_id = users.id ORDER BY comments.id DESC ");
-        $answer->bindParam(1,$this->questionID);
+            $answer = $this->dbconnect->prepare("SELECT users.firstname,users.lastname,users.profile_pic,comments.user_id,comments.answer FROM users,`comments` WHERE question_id = ? AND comments.user_id = users.id ORDER BY comments.id DESC ");
+            $answer->bindParam(1,$this->questionID);
 
-        $answer->execute();
-        $getReply = $answer->fetchAll(PDO::FETCH_ASSOC);
+            $answer->execute();
+            $getReply = $answer->fetchAll(PDO::FETCH_ASSOC);
 
-        return $getReply;
+            return $getReply;
 
     }
 
