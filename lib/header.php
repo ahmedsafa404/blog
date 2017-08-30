@@ -56,7 +56,7 @@ session_start();
 
 
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav ">
                     <form class="navbar-form navbar-left" action="search.php" method="get">
                         <div class="input-group">
                             <input type="text" name="q" class="form-control" placeholder="Search" size="40">
@@ -79,9 +79,9 @@ session_start();
 
                     <?php } ?>
 
-
                 </ul>
             </div>
+
         </nav>
 
     </div>

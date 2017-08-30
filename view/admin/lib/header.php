@@ -25,6 +25,10 @@ $info = $userInfo->userInfo($userID);
 
     <title>AskMe</title>
 
+    <!-- Chatbox   -->
+
+    <link href="../css/chat.css" rel="stylesheet">
+
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -89,7 +93,7 @@ $info = $userInfo->userInfo($userID);
         <ul class="nav navbar-nav navbar-right">
             <form class="navbar-form navbar-left" action="user.php" method="get">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search" size="40">
+                    <input type="text" name="q" class="form-control" placeholder="Search People" size="40">
                     <div class="input-group-btn">
                         <button class="btn btn-primary" name="search"type="submit">
                             <i class="glyphicon glyphicon-search"></i>
@@ -98,4 +102,6 @@ $info = $userInfo->userInfo($userID);
                 </div>
             </form>
         </ul>
+
+
     </nav>

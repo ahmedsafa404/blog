@@ -531,7 +531,32 @@ class Askme
         return $search;
     }
 
+    public function userSearch($query = '')
+    {
+        $data = htmlspecialchars(htmlentities(stripslashes(strip_tags($query['q']))));
+        $data = "%$data%";
 
+        $user = $this->dbconnect->prepare("SELECT * FROM users WHERE firstname LIKE :query or lastname LIKE :query or username LIKE :query or email LIKE :query or location LIKE :query or phone LIKE :query");
+        $user->bindParam(':query',$data);
+        $user->execute();
+
+        $user = $user->fetchAll(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
+
+    public function FriendsProfile($userID = '')
+    {
+        $userID = $userID;
+
+        $query = $this->dbconnect->prepare("SELECT * FROM users WHERE id = ? ");
+        $query->bindParam(1,$userID);
+        $query->execute();
+
+        $fetch = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $fetch;
+    }
 
 
 }

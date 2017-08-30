@@ -15,6 +15,13 @@
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Questions</a>
         </li>
+        <li class="">
+            <a href="profile.php">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                Friends</a>
+        </li>
+
 
 
     </ul>
